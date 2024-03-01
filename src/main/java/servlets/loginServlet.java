@@ -46,7 +46,6 @@ public class loginServlet extends HttpServlet {
                               Item item = new Item();
                               item.setName(itemResultSet.getString("name"));
                               item.setDescription(itemResultSet.getString("description"));
-                              item.setStock(itemResultSet.getInt("stock"));
                               item.setPrice(itemResultSet.getDouble("price"));
                               items.add(item);
                            }
@@ -54,7 +53,6 @@ public class loginServlet extends HttpServlet {
                            for (Item item : items) {
                               itemsStringBuilder.append(item.getName()).append(":")
                                     .append(item.getDescription()).append(":")
-                                    .append(item.getStock()).append(":")
                                     .append(item.getPrice()).append(";");
                            }
                            String itemsString = itemsStringBuilder.toString();

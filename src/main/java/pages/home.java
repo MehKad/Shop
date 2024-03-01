@@ -27,7 +27,7 @@ public class home extends HttpServlet {
       String[] itemTokens = itemsString.split(";");
       for (String token : itemTokens) {
          String[] itemInfo = token.split(":");
-         Item item = new Item(itemInfo[0], itemInfo[1], Integer.parseInt(itemInfo[2]), Double.parseDouble(itemInfo[3]));
+         Item item = new Item(itemInfo[0], itemInfo[1], Double.parseDouble(itemInfo[2]));
          items.add(item);
       }
       if (username == null || items == null) {
@@ -37,12 +37,21 @@ public class home extends HttpServlet {
          out.println("<h1>Home page</h1><br>");
          out.println("<p>Welcome " + username + "</p>");
          out.println("<h2>Items:</h2>");
-         out.println("<ul>");
+         out.println("<table border='1'>");
+         out.println("<tr><th>Name</th><th>Description</th><th>Price</th><th>Action</th></tr>");
          for (Item item : items) {
-            out.println("<li>Name: " + item.getName() + ", Description: " + item.getDescription() + ", Stock: "
-                  + item.getStock() + ", Price: " + item.getPrice() + "</li>");
+            out.println("<tr>");
+            out.println("<td>" + item.getName() + "</td>");
+            out.println("<td>" + item.getDescription() + "</td>");
+            out.println("<td>" + item.getPrice() + "</td>");
+            out.println("<td><form action='addtocart' method='post'>");
+            out.println("<input type='hidden' name='item_name' value='" + item.getName() + "'/>");
+            out.println("<input type='hidden' name='item_price' value='" + item.getPrice() + "'/>");
+            out.println("<input type='submit' value='Add to Cart'/>");
+            out.println("</form></td>");
+            out.println("</tr>");
          }
-         out.println("</ul>");
+         out.println("</table>");
          out.println("<a href=\"./\">Exit</a>");
          out.println("</body></html>");
       }

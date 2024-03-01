@@ -1,7 +1,10 @@
 d:\S6\JEE\Maven Projects\shop\src\main\java\models\Item.java
+d:\S6\JEE\Maven Projects\shop\src\main\java\pages\cart.java
 d:\S6\JEE\Maven Projects\shop\src\main\java\pages\register.java
 d:\S6\JEE\Maven Projects\shop\src\main\java\servlets\loginServlet.java
+d:\S6\JEE\Maven Projects\shop\src\main\java\models\Cart.java
 d:\S6\JEE\Maven Projects\shop\src\main\java\pages\login.java
 d:\S6\JEE\Maven Projects\shop\src\main\java\pages\home.java
 d:\S6\JEE\Maven Projects\shop\src\main\java\servlets\registerServlet.java
 d:\S6\JEE\Maven Projects\shop\src\main\java\config\DBConfig.java
+d:\S6\JEE\Maven Projects\shop\src\main\java\servlets\addServlet.java

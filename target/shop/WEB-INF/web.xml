@@ -57,5 +57,27 @@
         <servlet-name>login</servlet-name>
         <url-pattern>/loginServlet</url-pattern>
     </servlet-mapping>
+
+    <!-- Add to cart servlet -->
+
+    <servlet>
+        <servlet-name>AddToCart</servlet-name>
+        <servlet-class>servlets.addServlet</servlet-class>
+    </servlet>
+
+    <servlet-mapping>
+        <servlet-name>AddToCart</servlet-name>
+        <url-pattern>/addtocart</url-pattern>
+    </servlet-mapping>
+
+    <servlet>
+        <servlet-name>Cart</servlet-name>
+        <servlet-class>pages.cart</servlet-class>
+    </servlet>
+
+    <servlet-mapping>
+        <servlet-name>Cart</servlet-name>
+        <url-pattern>/cart</url-pattern>
+    </servlet-mapping>
     
 </web-app>

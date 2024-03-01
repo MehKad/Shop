@@ -3,16 +3,14 @@ package models;
 public class Item {
    private String name;
    private String description;
-   private int stock;
    private double price;
 
    public Item() {
    }
 
-   public Item(String name, String description, int stock, double price) {
+   public Item(String name, String description, double price) {
       this.name = name;
       this.description = description;
-      this.stock = stock;
       this.price = price;
    }
 
@@ -30,14 +28,6 @@ public class Item {
 
    public void setDescription(String description) {
       this.description = description;
-   }
-
-   public int getStock() {
-      return stock;
-   }
-
-   public void setStock(int stock) {
-      this.stock = stock;
    }
 
    public double getPrice() {
