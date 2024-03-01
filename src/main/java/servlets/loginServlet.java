@@ -4,6 +4,7 @@ import java.io.IOException;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 import java.sql.SQLException;
 
 import jakarta.servlet.ServletException;
@@ -13,7 +14,7 @@ import jakarta.servlet.http.HttpServletResponse;
 
 import config.DBConfig;
 
-public class registerServlet extends HttpServlet {
+public class loginServlet extends HttpServlet {
 
    protected void doPost(HttpServletRequest request, HttpServletResponse response)
          throws ServletException, IOException {
@@ -26,13 +27,20 @@ public class registerServlet extends HttpServlet {
          try (Connection conn = DriverManager.getConnection(DBConfig.getInstance().getJdbcUrl(),
                DBConfig.getInstance().getDbUser(),
                DBConfig.getInstance().getDbPassword())) {
-            String sql = "INSERT INTO users (username, password) VALUES (?, ?)";
+            String sql = "SELECT * FROM users WHERE username = ? AND password = ?";
             try (PreparedStatement statement = conn.prepareStatement(sql)) {
                statement.setString(1, username);
                statement.setString(2, password);
-               statement.executeUpdate();
+               try (ResultSet resultSet = statement.executeQuery()) {
+                  if (resultSet.next()) {
+                     System.out.println("User logged in successfully");
+                     response.sendRedirect("home.html");
+                  } else {
+                     System.out.println("Invalid username or password");
+                     response.sendRedirect("login.html");
+                  }
+               }
             }
-            response.sendRedirect("home.html");
          }
       } catch (ClassNotFoundException | SQLException e) {
          e.printStackTrace();
