@@ -79,5 +79,17 @@
         <servlet-name>Cart</servlet-name>
         <url-pattern>/cart</url-pattern>
     </servlet-mapping>
+
+    <!-- Checkout servlet -->
+
+    <servlet>
+        <servlet-name>checkout</servlet-name>
+        <servlet-class>pages.check</servlet-class>
+    </servlet>
+
+    <servlet-mapping>
+        <servlet-name>checkout</servlet-name>
+        <url-pattern>/check</url-pattern>
+    </servlet-mapping>
     
 </web-app>

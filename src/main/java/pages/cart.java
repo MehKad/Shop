@@ -51,6 +51,7 @@ public class cart extends HttpServlet {
          out.println("<p>Total Price: $" + totalPrice + "</p>");
          out.println("<p>Number of Items: " + numberOfItems + "</p>");
          out.println("<a href=\"./home\">Continue shopping</a>");
+         out.println("<a href=\"./check\">Checkout ticket</a>");
          out.println("</body></html>");
       } else {
          response.sendRedirect("./");
