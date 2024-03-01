@@ -1,3 +1,7 @@
+pages\login.class
+servlets\registerServlet.class
+pages\register.class
 config\DBConfig.class
 servlets\loginServlet.class
-servlets\registerServlet.class
+pages\home.class
+models\Item.class

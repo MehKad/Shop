@@ -6,6 +6,8 @@ import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.List;
 
 import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServlet;
@@ -13,6 +15,7 @@ import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 
 import config.DBConfig;
+import models.Item;
 
 public class loginServlet extends HttpServlet {
 
@@ -27,14 +30,37 @@ public class loginServlet extends HttpServlet {
          try (Connection conn = DriverManager.getConnection(DBConfig.getInstance().getJdbcUrl(),
                DBConfig.getInstance().getDbUser(),
                DBConfig.getInstance().getDbPassword())) {
-            String sql = "SELECT * FROM users WHERE username = ? AND password = ?";
-            try (PreparedStatement statement = conn.prepareStatement(sql)) {
-               statement.setString(1, username);
-               statement.setString(2, password);
-               try (ResultSet resultSet = statement.executeQuery()) {
-                  if (resultSet.next()) {
+            String userSql = "SELECT * FROM users WHERE username = ? AND password = ?";
+            try (PreparedStatement userStatement = conn.prepareStatement(userSql)) {
+               userStatement.setString(1, username);
+               userStatement.setString(2, password);
+               try (ResultSet userResultSet = userStatement.executeQuery()) {
+                  if (userResultSet.next()) {
                      System.out.println("User logged in successfully");
-                     response.sendRedirect("./home?username=" + username);
+
+                     String itemSql = "SELECT * FROM items";
+                     try (PreparedStatement itemStatement = conn.prepareStatement(itemSql)) {
+                        try (ResultSet itemResultSet = itemStatement.executeQuery()) {
+                           List<Item> items = new ArrayList<>();
+                           while (itemResultSet.next()) {
+                              Item item = new Item();
+                              item.setName(itemResultSet.getString("name"));
+                              item.setDescription(itemResultSet.getString("description"));
+                              item.setStock(itemResultSet.getInt("stock"));
+                              item.setPrice(itemResultSet.getDouble("price"));
+                              items.add(item);
+                           }
+                           StringBuilder itemsStringBuilder = new StringBuilder();
+                           for (Item item : items) {
+                              itemsStringBuilder.append(item.getName()).append(":")
+                                    .append(item.getDescription()).append(":")
+                                    .append(item.getStock()).append(":")
+                                    .append(item.getPrice()).append(";");
+                           }
+                           String itemsString = itemsStringBuilder.toString();
+                           response.sendRedirect("./home?username=" + username + "&items=" + itemsString);
+                        }
+                     }
                   } else {
                      System.out.println("Invalid username or password");
                   }
