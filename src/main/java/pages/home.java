@@ -54,6 +54,8 @@ public class home extends HttpServlet {
             out.println("<a href=\"./cart\">View cart</a>");
             out.println("</body></html>");
          }
+      } else {
+         response.sendRedirect("./");
       }
    }
 }
