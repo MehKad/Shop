@@ -34,17 +34,15 @@ public class loginServlet extends HttpServlet {
                try (ResultSet resultSet = statement.executeQuery()) {
                   if (resultSet.next()) {
                      System.out.println("User logged in successfully");
-                     response.sendRedirect("home.html");
+                     response.sendRedirect("./home");
                   } else {
                      System.out.println("Invalid username or password");
-                     response.sendRedirect("login.html");
                   }
                }
             }
          }
       } catch (ClassNotFoundException | SQLException e) {
          e.printStackTrace();
-         response.sendRedirect("error.html");
       }
    }
 }

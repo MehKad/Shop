@@ -4,18 +4,48 @@
          xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/javaee http://xmlns.jcp.org/xml/ns/javaee/web-app_4_0.xsd"
          version="4.0">
 
-    <welcome-file-list>
-      <welcome-file>login.html</welcome-file>
-    </welcome-file-list>
-         
+<!-- Load the pages from the java files -->
+
     <servlet>
+        <servlet-name>loginPage</servlet-name>
+        <servlet-class>pages.login</servlet-class>
+    </servlet>
+
+    <servlet-mapping>
+        <servlet-name>loginPage</servlet-name>
+        <url-pattern>/</url-pattern>
+    </servlet-mapping>
+    
+    <servlet>
+        <servlet-name>registerPage</servlet-name>
+        <servlet-class>pages.register</servlet-class>
+    </servlet>
+
+    <servlet-mapping>
+        <servlet-name>registerPage</servlet-name>
+        <url-pattern>/register</url-pattern>
+    </servlet-mapping>
+        
+    <servlet>
+        <servlet-name>homePage</servlet-name>
+        <servlet-class>pages.home</servlet-class>
+    </servlet>
+
+    <servlet-mapping>
+        <servlet-name>homePage</servlet-name>
+        <url-pattern>/home</url-pattern>
+    </servlet-mapping>
+
+<!-- Java servlets for the action login and register -->
+
+   <servlet>
         <servlet-name>register</servlet-name>
         <servlet-class>servlets.registerServlet</servlet-class>
     </servlet>
     
     <servlet-mapping>
         <servlet-name>register</servlet-name>
-        <url-pattern>/register</url-pattern>
+        <url-pattern>/registerServlet</url-pattern>
     </servlet-mapping>
 
     <servlet>
@@ -25,7 +55,7 @@
 
     <servlet-mapping>
         <servlet-name>login</servlet-name>
-        <url-pattern>/login</url-pattern>
+        <url-pattern>/loginServlet</url-pattern>
     </servlet-mapping>
     
 </web-app>

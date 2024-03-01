@@ -32,11 +32,10 @@ public class registerServlet extends HttpServlet {
                statement.setString(2, password);
                statement.executeUpdate();
             }
-            response.sendRedirect("home.html");
+            response.sendRedirect("./");
          }
       } catch (ClassNotFoundException | SQLException e) {
          e.printStackTrace();
-         response.sendRedirect("error.html");
       }
    }
 }
