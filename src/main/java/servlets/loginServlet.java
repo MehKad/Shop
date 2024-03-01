@@ -34,7 +34,7 @@ public class loginServlet extends HttpServlet {
                try (ResultSet resultSet = statement.executeQuery()) {
                   if (resultSet.next()) {
                      System.out.println("User logged in successfully");
-                     response.sendRedirect("./home");
+                     response.sendRedirect("./home?username=" + username);
                   } else {
                      System.out.println("Invalid username or password");
                   }

@@ -16,9 +16,16 @@ public class home extends HttpServlet {
       response.setContentType("text/html");
       PrintWriter out = response.getWriter();
 
-      out.println("<html><head><title>Home page</title></head><body>");
-      out.println("<h1>Home page</h1><br>");
-      out.println("<a href=\"./\">Exit</a>");
-      out.println("</body></html>");
+      String username = request.getParameter("username");
+
+      if (username == null) {
+         response.sendRedirect("./");
+      } else {
+         out.println("<html><head><title>Home page</title></head><body>");
+         out.println("<h1>Home page</h1><br>");
+         out.println("<p>Welcome " + username + "</p>");
+         out.println("<a href=\"./\">Exit</a>");
+         out.println("</body></html>");
+      }
    }
 }
