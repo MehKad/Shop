@@ -13,6 +13,7 @@ import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
+import jakarta.servlet.http.HttpSession;
 
 import config.DBConfig;
 import models.Item;
@@ -38,10 +39,13 @@ public class loginServlet extends HttpServlet {
                   if (userResultSet.next()) {
                      System.out.println("User logged in successfully");
 
+                     HttpSession session = request.getSession();
+                     session.setAttribute("username", username);
+
+                     List<Item> items = new ArrayList<>();
                      String itemSql = "SELECT * FROM items";
                      try (PreparedStatement itemStatement = conn.prepareStatement(itemSql)) {
                         try (ResultSet itemResultSet = itemStatement.executeQuery()) {
-                           List<Item> items = new ArrayList<>();
                            while (itemResultSet.next()) {
                               Item item = new Item();
                               item.setName(itemResultSet.getString("name"));
@@ -49,18 +53,15 @@ public class loginServlet extends HttpServlet {
                               item.setPrice(itemResultSet.getDouble("price"));
                               items.add(item);
                            }
-                           StringBuilder itemsStringBuilder = new StringBuilder();
-                           for (Item item : items) {
-                              itemsStringBuilder.append(item.getName()).append(":")
-                                    .append(item.getDescription()).append(":")
-                                    .append(item.getPrice()).append(";");
-                           }
-                           String itemsString = itemsStringBuilder.toString();
-                           response.sendRedirect("./home?username=" + username + "&items=" + itemsString);
                         }
                      }
+
+                     session.setAttribute("items", items);
+
+                     response.sendRedirect("./home");
                   } else {
                      System.out.println("Invalid username or password");
+                     response.sendRedirect("./");
                   }
                }
             }

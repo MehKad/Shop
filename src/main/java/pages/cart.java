@@ -20,10 +20,14 @@ public class cart extends HttpServlet {
       PrintWriter out = response.getWriter();
 
       HttpSession session = request.getSession(false);
-      List<Cart> carts = (List<Cart>) session.getAttribute("cart");
+      String username = (String) session.getAttribute("username");
+
+      String cartSessionAttributeName = "cart_" + username;
+
+      List<Cart> carts = (List<Cart>) session.getAttribute(cartSessionAttributeName);
 
       out.println("<html><head><title>Cart page</title></head><body>");
-      out.println("<h1>Cart page</h1><br>");
+      out.println("<h1>Cart page for " + username + "</h1><br>");
       out.println("<h2>Your cart:</h2>");
       out.println("<table border='1'>");
       out.println("<tr><th>Name</th><th>Price</th></tr>");
@@ -38,7 +42,7 @@ public class cart extends HttpServlet {
          out.println("<tr><td colspan='2'>Your cart is empty</td></tr>");
       }
       out.println("</table>");
-      out.println("<a href=\"./\">Back to home</a>");
+      out.println("<a href=\"./home\">Continue shopping</a>");
       out.println("</body></html>");
    }
 }

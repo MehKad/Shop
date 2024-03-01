@@ -1,7 +1,10 @@
 pages\login.class
+pages\cart.class
 servlets\registerServlet.class
 pages\register.class
 config\DBConfig.class
 servlets\loginServlet.class
 pages\home.class
 models\Item.class
+models\Cart.class
+servlets\addServlet.class

@@ -21,11 +21,15 @@ public class addServlet extends HttpServlet {
       double itemPrice = Double.parseDouble(request.getParameter("item_price"));
 
       HttpSession session = request.getSession(true);
-      List<Cart> cartList = (List<Cart>) session.getAttribute("cart");
+      String username = (String) session.getAttribute("username");
+
+      String cartSessionAttributeName = "cart_" + username;
+
+      List<Cart> cartList = (List<Cart>) session.getAttribute(cartSessionAttributeName);
 
       if (cartList == null) {
          cartList = new ArrayList<>();
-         session.setAttribute("cart", cartList);
+         session.setAttribute(cartSessionAttributeName, cartList);
       }
 
       Cart cart = new Cart(itemName, itemPrice);
