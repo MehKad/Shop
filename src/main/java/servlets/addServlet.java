@@ -25,6 +25,7 @@ public class addServlet extends HttpServlet {
 
       String cartSessionAttributeName = "cart_" + username;
 
+      @SuppressWarnings("unchecked")
       List<Cart> cartList = (List<Cart>) session.getAttribute(cartSessionAttributeName);
 
       if (cartList == null) {

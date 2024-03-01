@@ -24,6 +24,7 @@ public class home extends HttpServlet {
       if (session != null) {
          String username = (String) session.getAttribute("username");
 
+         @SuppressWarnings("unchecked")
          List<Item> items = (List<Item>) session.getAttribute("items");
 
          if (username == null || items == null) {
